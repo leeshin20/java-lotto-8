@@ -19,6 +19,16 @@ public class LottoController {
         Output.displayLottos(lottos);;
     }
 
+    public void drawLottoWinner() {
+        Output.promptWinningNumber();
+        this.winningNumbers = Input.inputWinningNumber();
+
+        Output.promptBonusNumber();
+        this.bonusNumber = Input.inputBonusNumber(winningNumbers);
+
+        Output.displayWinnerStatistics(lottos);
+    }
+
     private void issueLotto(Integer purchaseAmount) {
         for (int i = 0; i < purchaseAmount/1000; i++) {
             List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
