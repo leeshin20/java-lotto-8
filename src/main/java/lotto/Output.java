@@ -7,8 +7,12 @@ public class Output {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void displayLottos(Integer numberOfLottos) {
-        System.out.println("0개를 구매했습니다.");
+    public static void displayLottos(List<Lotto> lottos) {
+        System.out.println("\n" + lottos.size() + "개를 구매했습니다.");
+
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.getNumbers());
+        }
     }
 
     public static void promptWinningNumber() {
