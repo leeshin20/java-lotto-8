@@ -6,31 +6,19 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
     public static Integer inputPurchaseAmount() {
-        while (true) {
-            String input = Console.readLine();
+        String input = Console.readLine();
 
-            try {
-                validateNumber(input);
-                validatePurchaseAmount(Integer.parseInt(input));
-                return Integer.parseInt(input);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        validateNumber(input);
+        validatePurchaseAmount(Integer.parseInt(input));
+        return Integer.parseInt(input);
     }
 
     public static Lotto inputWinningNumber() {
-        while (true) {
-            String input = Console.readLine();
+        String input = Console.readLine();
 
-            try {
-                List<Integer> winningNumbers = parseWinningNumbers(input);
-                validateWinningNumbers(winningNumbers);
-                return new Lotto(winningNumbers);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        List<Integer> winningNumbers = parseWinningNumbers(input);
+        validateWinningNumbers(winningNumbers);
+        return new Lotto(winningNumbers);
     }
 
     public static Integer inputBonusNumber(List<Integer> winningNumbers) {
@@ -61,13 +49,8 @@ public class Input {
         List<Integer> numbers = new ArrayList<>();
 
         for (String number : stringNumbers) {
-            try {
-                validateNumber(number.trim());
-                numbers.add(Integer.parseInt(number.trim()));
-
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+            validateNumber(number.trim());
+            numbers.add(Integer.parseInt(number.trim()));
         }
         return numbers;
     }
