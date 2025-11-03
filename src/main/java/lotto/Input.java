@@ -6,26 +6,44 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
     public static Integer inputPurchaseAmount() {
-        String input = Console.readLine();
+        while(true) {
+            try {
+                String input = Console.readLine();
 
-        validateNumber(input);
-        validatePurchaseAmount(Integer.parseInt(input));
-        return Integer.parseInt(input);
+                validateNumber(input);
+                validatePurchaseAmount(Integer.parseInt(input));
+                return Integer.parseInt(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + " 다시 입력해 주세요.");
+            }
+        }
     }
 
-    public static Lotto inputWinningNumber() {
-        String input = Console.readLine();
+    public static List<Integer> inputWinningNumber() {
+        while(true) {
+            try {
+                String input = Console.readLine();
 
-        List<Integer> winningNumbers = parseWinningNumbers(input);
-        validateWinningNumbers(winningNumbers);
-        return new Lotto(winningNumbers);
+                List<Integer> winningNumbers = parseWinningNumbers(input);
+                validateWinningNumbers(winningNumbers);
+                return winningNumbers;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + " 다시 입력해 주세요.");
+            }
+        }
     }
 
     public static Integer inputBonusNumber(List<Integer> winningNumbers) {
-        String input = Console.readLine();
-        validateNumber(input);
-        validateBonusNumber(winningNumbers, Integer.parseInt(input));
-        return Integer.parseInt(input);
+        while(true) {
+            try {
+                String input = Console.readLine();
+                validateNumber(input);
+                validateBonusNumber(winningNumbers, Integer.parseInt(input));
+                return Integer.parseInt(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + " 다시 입력해 주세요.");
+            }
+        }
     }
 
     public static void validateNumber(String input) {
