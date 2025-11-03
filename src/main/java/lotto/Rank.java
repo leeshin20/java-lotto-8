@@ -21,4 +21,23 @@ public enum Rank {
     public long getPrizeMoney() {
         return prizeMoney;
     }
+
+    public static Rank valueOf(int matchCount, boolean bonusMatch) {
+        if (matchCount == 6) {
+            return FIRST;
+        }
+        if (matchCount == 5) {
+            if (bonusMatch) {
+                return SECOND;
+            }
+            return THIRD;
+        }
+        if (matchCount == 4) {
+            return FOURTH;
+        }
+        if (matchCount == 3) {
+            return FIFTH;
+        }
+        return MISS;
+    }
 }
