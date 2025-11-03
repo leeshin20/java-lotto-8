@@ -33,8 +33,11 @@ public class Input {
         }
     }
 
-    public static void inputBonusNumber() {
-
+    public static Integer inputBonusNumber(List<Integer> winningNumbers) {
+        String input = Console.readLine();
+        validateNumber(input);
+        validateBonusNumber(winningNumbers, Integer.parseInt(input));
+        return Integer.parseInt(input);
     }
 
     public static void validateNumber(String input) {
@@ -82,6 +85,14 @@ public class Input {
         for (int number : numbers) {
             if (number < 1 || number > 45) {
                 throw new IllegalArgumentException("[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.");
+            }
+        }
+    }
+
+    public static void validateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
+        for (Integer number : winningNumbers) {
+            if (bonusNumber.equals(number)) {
+                throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
             }
         }
     }
