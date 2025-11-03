@@ -22,6 +22,13 @@ public enum Rank {
         return prizeMoney;
     }
 
+    public String getFormattedMessage(int count) {
+        if (this == MISS) {
+            return "";
+        }
+        return String.format(messageFormat, prizeMoney) + " - " + count + "개";
+    }
+
     public static Rank valueOf(int matchCount, boolean bonusMatch) {
         if (matchCount == 6) {
             return FIRST;
