@@ -38,8 +38,10 @@ public class LottoController {
     private void issueLotto(Integer purchaseAmount) {
         for (int i = 0; i < purchaseAmount/1000; i++) {
             List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
-            Collections.sort(numbers);
-            lottos.add(new Lotto(numbers));
+            List<Integer> sortedNumbers = new ArrayList<>(numbers);
+
+            Collections.sort(sortedNumbers);
+            lottos.add(new Lotto(sortedNumbers));
         }
     }
 
