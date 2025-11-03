@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -12,21 +13,27 @@ public class Input {
                 validateNumber(input);
                 validatePurchaseAmount(Integer.parseInt(input));
                 return Integer.parseInt(input);
-
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    public static void inputWinningNumber() {
+    public static Lotto inputWinningNumber() {
+        while (true) {
+            String input = Console.readLine();
+
+            try {
+                List<Integer> winningNumbers = parseWinningNumbers(input);
+                validateWinningNumbers(winningNumbers);
+                return new Lotto(winningNumbers);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public static void inputBonusNumber() {
-
-    }
-
-    public static void separateWinningNumber() {
 
     }
 
@@ -43,6 +50,39 @@ public class Input {
 
         if (input <= 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 0원 이상이어야 합니다.");
+        }
+    }
+
+    private static List<Integer> parseWinningNumbers(String input) {
+        String[] stringNumbers = input.split(",");
+        List<Integer> numbers = new ArrayList<>();
+
+        for (String number : stringNumbers) {
+            try {
+                validateNumber(number.trim());
+                numbers.add(Integer.parseInt(number.trim()));
+
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return numbers;
+    }
+
+    public static void validateWinningNumbers(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 합니다.");
+        }
+
+        long uniqueCount = numbers.stream().distinct().count();
+        if (uniqueCount != numbers.size()) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복될 수 없습니다.");
+        }
+
+        for (int number : numbers) {
+            if (number < 1 || number > 45) {
+                throw new IllegalArgumentException("[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.");
+            }
         }
     }
 
