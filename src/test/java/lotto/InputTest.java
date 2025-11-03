@@ -3,6 +3,9 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class InputTest {
@@ -34,5 +37,25 @@ public class InputTest {
         assertThatThrownBy(() -> Input.validatePurchaseAmount(Integer.parseInt(input)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 구입 금액은 0원 이상이어야 합니다.");
+    }
+
+    @Test
+    @DisplayName("입력된 당첨 번호 예외처리 테스트")
+    void validWinningNumber() {
+        List<Integer> winningNumber1 = List.of(1,2,3,4,5,6,7);
+        List<Integer> winningNumber2 = List.of(1,1,1,1,1,1);
+        List<Integer> winningNumber3 = List.of(0,55,51,52,58,61);
+
+        assertThatThrownBy(() -> Input.validateWinningNumbers(winningNumber1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 당첨 번호는 6개여야 합니다.");
+
+        assertThatThrownBy(() -> Input.validateWinningNumbers(winningNumber2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 당첨 번호는 중복될 수 없습니다.");
+
+        assertThatThrownBy(() -> Input.validateWinningNumbers(winningNumber3))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
 }
