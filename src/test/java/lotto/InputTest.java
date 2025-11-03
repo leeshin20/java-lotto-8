@@ -2,8 +2,6 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -42,9 +40,9 @@ public class InputTest {
     @Test
     @DisplayName("입력된 당첨 번호 예외처리 테스트")
     void validWinningNumber() {
-        List<Integer> winningNumber1 = List.of(1,2,3,4,5,6,7);
-        List<Integer> winningNumber2 = List.of(1,1,1,1,1,1);
-        List<Integer> winningNumber3 = List.of(0,55,51,52,58,61);
+        List<Integer> winningNumber1 = List.of(1, 2, 3, 4, 5, 6, 7);
+        List<Integer> winningNumber2 = List.of(1, 1, 1, 1, 1, 1);
+        List<Integer> winningNumber3 = List.of(0, 55, 51, 52, 58, 61);
 
         assertThatThrownBy(() -> Input.validateWinningNumbers(winningNumber1))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -62,7 +60,7 @@ public class InputTest {
     @Test
     @DisplayName("입력된 보너스 번호 예외처리 테스트")
     void validBonusNumber() {
-        List<Integer> winningNumber = List.of(1,2,3,4,5,6);
+        List<Integer> winningNumber = List.of(1, 2, 3, 4, 5, 6);
         Integer bonusNumber = 1;
 
         assertThatThrownBy(() -> Input.validateBonusNumber(winningNumber, bonusNumber))
