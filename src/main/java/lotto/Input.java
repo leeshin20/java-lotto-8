@@ -10,7 +10,8 @@ public class Input {
 
             try {
                 validateNumber(input);
-                return validatePurchaseAmount(Integer.parseInt(input));
+                validatePurchaseAmount(Integer.parseInt(input));
+                return Integer.parseInt(input);
 
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -35,7 +36,7 @@ public class Input {
         }
     }
 
-    public static Integer validatePurchaseAmount(Integer input) {
+    public static void validatePurchaseAmount(Integer input) {
         if (input % 1000 != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액이 1000원으로 나누어 떨어지지 않습니다.");
         }
@@ -43,8 +44,6 @@ public class Input {
         if (input <= 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 0원 이상이어야 합니다.");
         }
-
-        return input;
     }
 
     public static boolean isInteger(String input) {
