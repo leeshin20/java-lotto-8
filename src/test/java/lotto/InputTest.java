@@ -58,4 +58,15 @@ public class InputTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
+
+    @Test
+    @DisplayName("입력된 보너스 번호 예외처리 테스트")
+    void validBonusNumber() {
+        List<Integer> winningNumber = List.of(1,2,3,4,5,6);
+        Integer bonusNumber = 1;
+
+        assertThatThrownBy(() -> Input.validateBonusNumber(winningNumber, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+    }
 }
