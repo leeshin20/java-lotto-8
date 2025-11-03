@@ -32,6 +32,7 @@ public class LottoController {
         Map<Rank, Integer> statistics = calculateStatistics(winningNumbers, bonusNumber);
 
         Output.displayWinnerStatistics(statistics);
+        Output.displayProfitRate(calculateTotalPrize(statistics), this.purchaseAmount);
     }
 
     private void issueLotto(Integer purchaseAmount) {

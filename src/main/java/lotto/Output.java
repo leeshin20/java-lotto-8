@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.Map;
 
 public class Output {
     public static void promptCost() {
@@ -23,15 +24,25 @@ public class Output {
         System.out.println("\n보너스 번호를 입력해 주세요.");
     }
 
-    public static void displayWinnerStatistics(List<Lotto> lottos) {
+    public static void displayWinnerStatistics(Map<Rank, Integer> statistics) {
         System.out.println("\n당첨 통계");
         System.out.println("---");
-        System.out.println("3개 일치 (5,000원) - 0개");
-        System.out.println("4개 일치 (50,000원) - 0개");
-        System.out.println("5개 일치 (1,500,000원) - 0개");
-        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - 0개");
-        System.out.println("6개 일치 (2,000,000,000원) - 0개");
-        System.out.println("총 수익률은 00.0%입니다.");
+        List<Rank> displayOrder = List.of(
+                Rank.FIFTH,
+                Rank.FOURTH,
+                Rank.THIRD,
+                Rank.SECOND,
+                Rank.FIRST
+        );
+        for (Rank rank : displayOrder) {
+            int count = statistics.get(rank);
+            System.out.println(rank.getFormattedMessage(count));
+        }
+    }
+
+    public static void displayProfitRate(Long totalPrize, int purchaseAmount) {
+        double rate = ((double) totalPrize / purchaseAmount) * 100.0;
+        System.out.printf("총 수익률은 %.1f%%입니다.\n", rate);
     }
 }
 
